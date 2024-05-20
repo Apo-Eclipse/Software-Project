@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang                ="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image Example</title>
+    <style>
+        html {
+            background: url("{% static "img/back.png" %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        html, body {
+            overflow: auto;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .bs {
+            width: 15%;
+            height: 10%;
+            padding: 15px;
+            background-color: #03763E;
+            position: absolute;
+            border-radius: 15px;
+            border: none;
+        }
+
+        #b1 {
+            top: 35%;
+            left: 70%;
+        }
+
+        #b2 {
+            top: 50%;
+            left: 70%;
+        }
+
+        #d1 {
+            color: #7EF8A7;
+            font-size: 24px;
+            font-family: sans-serif;
+            letter-spacing: 3.20px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div>
+
+        <a href           ="{% url 'login' %}">
+            <button class ="bs" id="b1">
+                <div id   ="d1">LOGIN</div>
+            </button>
+        </a>
+        <a href           ="{% url 'register' %}">
+            <button class ="bs" id="b2">
+                <div id   ="d1">REGISTER</div>
+            </button>
+            </a>
+    </div>
+</body>
+</html>

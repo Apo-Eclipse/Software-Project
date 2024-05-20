@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image Example</title>
+    <style>
+        html {
+            background: url("{% static "img/back.png" %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+
+        html, body {
+            overflow: auto;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            background: #7EF8A7;
+            position: relative;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            height: 85%;
+            width: 35%;
+            top: 7.5%;
+            left: 65%;
+            
+        }
+
+        .bs {
+            width: 40vh;
+            position: relative;
+            text-align: center;
+            border-radius: 15px;
+            border: none;
+            height: 10%;
+            margin-left: 25%;
+        }
+
+
+        ::placeholder {
+            color: #7EF8A7;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+        }
+
+        #f_name {
+            margin-top: 14%;
+            color: #7EF8A7;
+            background: #22AF6B;
+        }
+        #l_name {
+            color: #7EF8A7;
+            margin-top: 7%;
+            background: #22AF6B;
+        }
+        #email {
+            color: #7EF8A7;
+            margin-top: 7%;
+            background: #22AF6B;
+        }
+        #pass {
+            margin-top: 7%;
+            color: #7EF8A7;
+            background: #22AF6B;
+        }
+
+
+        #d1 {
+            color: #7EF8A7;
+            font-size: 24px;
+            font-family: sans-serif;
+        }
+        #submit {
+            margin-top: 7%;
+            background: #03763E;
+            width: 40vh;
+        }
+        #h {
+            position: absolute;
+            color: #03763E;
+            font-size: 128px;
+            font-family: system-ui;
+            font-weight: 400;
+            left: 10%;
+            top: 15%;
+            letter-spacing: 12.80px;
+            word-wrap: break-word
+        }
+        .error_m {
+            top: 3%;
+            position: relative;
+            color: #03763E;
+            text-align: center;
+            font-weight: 400;
+            left: 25%;
+            width: 40vh;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="h">REGISTER<br>HERE</h1>
+    <form id="box" action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <input class="bs" id="f_name" name="f_name" placeholder="FIRST NAME" required><br>
+        <input class="bs" id="l_name" name="l_name" placeholder="LAST NAME" required><br>
+        <input class="bs" id="email" name="email" placeholder="EMAIL" type="email" required><br>
+        <input class="bs" id="pass" name="pass" type="password" placeholder="PASSWORD" required><br>
+        <button class="bs" id="submit">
+            <div id="d1">SUBMIT</div>
+        </button>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="error_m">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+    </form>
+</body>
+</html>
