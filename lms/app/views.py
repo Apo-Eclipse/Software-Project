@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import classrooms, users_data
+from .models import *
 
 u_ser = None
 
@@ -20,7 +20,7 @@ def login_view(request):
         user = authenticate(request, username=email, password=password)
         if user:
             global u_ser
-            u_ser = users_data.objects.get(email = email)
+            u_ser = user_data.objects.get(email = email)
             login(request, user)
             return redirect('dashboard')  
         else:
@@ -31,7 +31,7 @@ def login_view(request):
 @login_required
 def dashboard(request):
     global u_ser
-    u_ser = users_data.objects.get(email = request.user.username)
+    u_ser = user_data.objects.get(email = request.user.username)
     
     return render(request, "dashboard.html",{'user':u_ser})
 
@@ -52,10 +52,10 @@ def register(request):
         else:
             user = User.objects.create_user(username=email, password=password, first_name=f_name, last_name=l_name)
             user.save()
-            u_s_er = users_data(email=email, firstname=f_name, lastname=l_name, password=user.password) 
+            u_s_er = user_data(email=email, fname=f_name, lname=l_name) 
             u_s_er.save()
             global u_ser
-            u_ser = users_data.objects.get(email = email)
+            u_ser = user_data.objects.get(email = email)
             login(request, user)
             return redirect('dashboard') 
         
