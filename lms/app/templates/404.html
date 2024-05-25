@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Image Example</title>
+    <style>
+        html {
+            background: url("{% static "img/back.png" %}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        html, body {
+            overflow: auto;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #h {
+            position: absolute;
+            color: #03763E;
+            font-size: 64px;
+            font-family: system-ui;
+            font-weight: 400;
+            left: 10%;
+            top: 15%;
+            letter-spacing: 12.80px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="h">PAGE<br>NOT<br>ACCESSIBLE</h1>
+</body>
+</html>

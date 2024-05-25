@@ -84,7 +84,7 @@
         #bu2 {
             position: fixed;
             top: 85%;
-            left: 26%;
+            left: 24%;
             width: 16%;
             height: 8%;
             font-size: 12px;
@@ -105,25 +105,51 @@
             visibility: hidden;
         }
 
-        #take_inp {
-            position: fixed;
-            top: 25%;
-            left: 25%;
-            width: 50%;
-            height: 50%;
-            background-color: #fff;
-            border-radius: 10px;
-            visibility: hidden;
-        }
-        .bs {
+        .inp {
             width: 50%;
             position: relative;
             text-align: center;
             border-radius: 15px;
-            margin-top: 10%;
-            border: none;
-            height: 20%;
+            top: 35%;
+            border-color: aquamarine;
+            height: 15%;
             margin-left: 25%;
+        }
+
+
+        .bs {
+            width: 50%;
+            position: relative;
+            text-align: center;
+            border-radius: 10px;
+            top: 50%;
+            border: none;
+            background-color: #03763E;
+            height: 11%;
+            margin-left: 25%;
+            color: #7EF8A7;
+        }
+
+
+        #take_inp {
+            position: fixed;
+            top: 15%;
+            left: 25%;
+            width: 50%;
+            height: 70%;
+            background-color: #fff;
+            border-radius: 10px;
+            visibility: hidden;
+        }
+        #create_class {
+            position: fixed;
+            top: 15%;
+            left: 25%;
+            width: 50%;
+            height: 70%;
+            background-color: #fff;
+            border-radius: 10px;
+            visibility: hidden;
         }
     </style>
 </head>
@@ -143,31 +169,57 @@
             <p>{{ user.firstname }}</p>
         </div>
     </div>
-    <button id="bu1">
+    <button id="bu1" onclick="fun_join()">
         JOIN CLASSROOM
     </button>
-    <button id="bu2" onclick="fun()">
+
+    <button id="bu2" onclick="fun_class_create()">
         CREATE CLASSROOM
     </button>
-    <div class="overlay" id="overlay" onclick="fun2()"></div>
-    <form id="take_inp" class="inp">
-        <input class="bs" id="f_name" name="f_name" placeholder="CLASSNAME" required><br>
-        <button class="bs" id="submit">SUBMIT</button>
+
+    <div class="overlay" id="overlay" onclick="fun_back()"></div>
+
+    <form id="create_class" class="create_classroom" method="POST">
+        {% csrf_token %}
+        <input class="inp" id="class_name" name="class_name" placeholder="CLASSROOM NAME" required><br>
+        <button class="bs" id="submit" name="create">SUBMIT</button>
     </form>
+
+    <form id="take_inp" class="inp_classroom" method="POST">
+        {% csrf_token %}
+        <input class="inp" id="class_id" name="class_id" placeholder="CLASSROOM ID" required><br>
+        <button class="bs" id="submit" name="join">SUBMIT</button>
+    </form>
+
     <script>
-        function fun() {
-            var div = document.querySelector('.inp');
+        function fun_back() {
+            var div = document.querySelector('.inp_classroom');
+            var div2 = document.getElementById('overlay');
+
+            var div3 = document.querySelector('.create_classroom');
+            var div4 = document.getElementById('overlay');
+
+            div.style.visibility = 'hidden';
+            div2.style.visibility = 'hidden';
+            div3.style.visibility = 'hidden';
+            div4.style.visibility = 'hidden';
+        }
+
+        function fun_join() {
+            var div = document.querySelector('.inp_classroom');
             var div2 = document.getElementById('overlay');
             div.style.visibility = 'visible';
             div2.style.visibility = 'visible';
         }
 
-        function fun2() {
-            var div = document.querySelector('.inp');
+
+        function fun_class_create() {
+            var div = document.querySelector('.create_classroom');
             var div2 = document.getElementById('overlay');
-            div.style.visibility = 'hidden';
-            div2.style.visibility = 'hidden';
+            div.style.visibility = 'visible';
+            div2.style.visibility = 'visible';
         }
     </script>
+
 </body>
 </html>

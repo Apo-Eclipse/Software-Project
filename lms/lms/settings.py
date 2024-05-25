@@ -31,6 +31,9 @@ ALLOWED_HOSTS = [
   'localhost',
   '127.0.0.1',]
 
+handler404 = 'myapp.views.view404'
+
+
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
 INSTALLED_APPS = [

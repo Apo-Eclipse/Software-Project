@@ -7,7 +7,7 @@ class user_data(models.Model):
 
 
 class Classroom(models.Model):
-    classroom_id = models.CharField(max_length=50, primary_key=True)
+    classroom_id = models.CharField(max_length=250, primary_key=True)
     classroom_name = models.CharField(max_length=50)
     creator_email = models.ForeignKey(user_data, on_delete=models.CASCADE)
 

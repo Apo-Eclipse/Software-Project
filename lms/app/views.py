@@ -5,8 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import *
+from datetime import datetime
 
 u_ser = None
+
+
+def view404(request, exception):
+    return render(request, '404.html', status=404)
 
 def start(request):
     logout(request)
@@ -37,6 +42,22 @@ def dashboard(request):
 
 @login_required
 def classroom(request):
+    if request.method == 'POST':
+        if 'create' in request.POST:
+            class_name = request.POST['class_name']
+            current_time_str = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+            try:
+                i_d = u_ser.email+"-classroom-"+current_time_str
+                classroom = Classroom(classroom_id=i_d, classroom_name=class_name, creator_email=u_ser)
+                classroom.save()
+            except Exception as error:
+                print("An exception occurred:", type(error).__name__)
+            request.POST = []
+            return redirect('/classroom')
+        elif 'join' in request.POST:
+            print("join")
+            request.POST = []
+        
     return render(request, "classroom.html",{'user':u_ser})
 
 def register(request):
